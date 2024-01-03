@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/orders-db
+    rest:
+      basePath: /api
+      defaultPageSize: 20
+      maxPageSize: 100
+
+togglz:
+  enabled: true
+  console:
+    enabled: true
+    path: /togglz-console
+    secured: false
+  features:
+    CREATE_ORDER:
+      enabled: false
+
+#MONGODB_USER: ${MONGODB_USER_NAME}
+#MONGODB_PASSWORD: ${MONGODB_USER_PWD}
