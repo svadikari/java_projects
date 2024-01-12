@@ -9,7 +9,7 @@ name: Spring REST API
 
 on:
   push:
-    types: [created]
+    branches: [main]
 
 jobs:
   build:
