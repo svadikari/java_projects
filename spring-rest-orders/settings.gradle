@@ -1,1 +1,3 @@
 rootProject.name = 'spring-rest-orders'
+include 'spring-rest-orders'
+include 'spring-rest-orders-performance'

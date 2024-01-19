@@ -1,0 +1,6 @@
+{
+  "orderNumber": "#{orderNumber}",
+  "styleNumber": "#{styleNumber}",
+  "price": "#{price}",
+  "units": "#{units}"
+}

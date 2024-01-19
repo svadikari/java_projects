@@ -7,11 +7,8 @@ import com.shyam.orders.repository.OrderRepository;
 import com.shyam.orders.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,5 +28,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void createOrder(OrderDto orderDto) {
         orderRepository.save(orderMapper.toEntity(orderDto));
+    }
+
+    @Override
+    public OrderDto fetchOrder(String orderNumber) {
+        return orderMapper.toDto(orderRepository.findByOrderNumber(orderNumber).stream().findFirst().orElse(null));
     }
 }
