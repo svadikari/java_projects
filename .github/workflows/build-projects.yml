@@ -15,6 +15,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        mongodb-version: ['4.4.14', '5.0.9']
     permissions:
       contents: read
       packages: write
@@ -32,6 +35,10 @@ jobs:
       run: |
         cd spring-rest-orders
         ./gradlew clean build
+    - name: Start MongoDB
+      uses: MongoCamp/mongodb-github-action@1.0.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
     - name: Run spring-rest-orders Feature Tests
       run: |
         cd spring-rest-orders
