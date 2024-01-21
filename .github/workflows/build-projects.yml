@@ -31,10 +31,10 @@ jobs:
     - name: Build spring-rest-orders
       run: |
         cd spring-rest-orders
-        ls -ltr
         ./gradlew clean build
     - name: Run spring-rest-orders Feature Tests
       run: |
+        cd spring-rest-orders
         ./gradlew clean featureComponents
     - name: Build spring-graphql-orders
       run: |
