@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpServerErrorException;
 import org.togglz.core.manager.FeatureManager;
 import org.togglz.core.util.NamedFeature;
 
@@ -38,14 +39,11 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<String> orders(@RequestBody @Validated OrderDto orderDto) {
-        String message = "Order Create Feature Not enabled!";
+    public OrderDto orders(@RequestBody @Validated OrderDto orderDto) {
         HttpStatus httpStatus = HttpStatus.NOT_IMPLEMENTED;
-        if(featureManager.isActive(new NamedFeature("CREATE_ORDER"))){
-            orderService.createOrder(orderDto);
-            message = "Successfully Created!";
-            httpStatus = HttpStatus.CREATED;
+        if(!featureManager.isActive(new NamedFeature("CREATE_ORDER"))){
+            throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED, "Order Create Feature Not enabled!");
         }
-        return new ResponseEntity<>(message, httpStatus);
+        return orderService.createOrder(orderDto);
     }
 }

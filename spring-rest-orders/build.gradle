@@ -1,4 +1,4 @@
-group = 'com.shyam.orders'
+group = 'com.shyam'
 
 buildscript {
 	apply from: 'dependent_versions.gradle'
@@ -40,10 +40,15 @@ subprojects {
 			mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
 		}
 	}
+
+	test {
+		useJUnitPlatform()
+	}
+
 	jacocoTestReport{
 		reports {
 			xml
-			html
+			csv
 		}
 		dependsOn test
 	}

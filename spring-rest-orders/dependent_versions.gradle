@@ -5,4 +5,7 @@ project.ext {
     springBootVersion = '3.2.1'
     gradleGitPropertiesVersion = '2.2.2'
     gatlingVersion = '3.10.3'
+    cucumberVersion = '7.15.0'
+    mongodbFlapdoodleVersion = '4.12.2'
+    restAssuredVersion = '5.4.0'
 }

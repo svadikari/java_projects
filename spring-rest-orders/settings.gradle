@@ -1,3 +1,4 @@
 rootProject.name = 'spring-rest-orders'
 include 'spring-rest-orders'
-include 'spring-rest-orders-performance'
+include 'spring-rest-orders-acceptance-tests'
+include 'spring-rest-orders-performance-tests'

@@ -1,0 +1,15 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /shyam
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/orders-stub-db
+
+togglz:
+  enabled: true
+  features:
+    CREATE_ORDER:
+      enabled: true
