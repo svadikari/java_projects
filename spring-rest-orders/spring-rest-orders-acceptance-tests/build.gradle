@@ -1,0 +1,42 @@
+evaluationDependsOn(':spring-rest-orders')
+
+dependencies {
+    testImplementation project(path: ':spring-rest-orders')
+    testImplementation (
+            "io.cucumber:cucumber-java:${cucumberVersion}",
+            "io.cucumber:cucumber-spring:${cucumberVersion}",
+            "io.cucumber:cucumber-java8:${cucumberVersion}",
+            "io.cucumber:cucumber-junit:${cucumberVersion}",
+            'org.springframework.boot:spring-boot-starter-test',
+            "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongodbFlapdoodleVersion}",
+            "io.rest-assured:rest-assured:${restAssuredVersion}"
+    )
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+
+task featureComponents(type: JavaExec, dependsOn: [assemble, testClasses]) {
+
+    mainClass = 'io.cucumber.core.cli.Main'
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+
+    jvmArgs = [
+            "-Dspring.profiles.active=stub",
+            "-Dspring.config.name=stub"
+    ]
+
+    args = [
+            '--plugin', 'pretty',
+            '--plugin', 'html:build/reports/cucumber/component.html',
+            '--plugin', 'json:../build/reports/cucumber/component/cucumber.json',
+            '--glue', 'com.shyam.orders.stepdefs',
+            '--glue', 'src/test/resources/features',
+            '--tags', 'not @pending'
+
+    ]
+}

@@ -1,0 +1,14 @@
+plugins {
+    id 'io.gatling.gradle' version "${gatlingVersion}"
+}
+
+evaluationDependsOn(':spring-rest-orders')
+
+dependencies {
+    testImplementation project(path: ':spring-rest-orders', configuration: 'default')
+}
+
+gatling {
+    logLevel = 'WARN' // logback root level
+    logHttp = 'NONE' // set to 'ALL' for all HTTP traffic in TRACE, 'FAILURES' for failed HTTP traffic in DEBUG
+}
