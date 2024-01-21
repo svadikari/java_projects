@@ -46,9 +46,9 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Start MongoDB
-      uses: MongoCamp/mongodb-github-action@1.0.0
+      uses: supercharge/mongodb-github-action@1.6.0
       with:
-        mongodb-version: '5.0.9'
+        mongodb-version: '4.4'
     - name: Run spring-rest-orders Feature Tests
       run: |
         cd spring-rest-orders
