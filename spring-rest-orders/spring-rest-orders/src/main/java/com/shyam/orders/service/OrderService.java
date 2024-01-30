@@ -7,7 +7,7 @@ import java.util.List;
 public interface OrderService {
     List<OrderDto> fetchOrders();
 
-    OrderDto createOrder(OrderDto orderDto);
+    OrderDto createOrder(OrderDto orderDto) throws Exception;
 
     OrderDto fetchOrder(String orderNumber);
 }

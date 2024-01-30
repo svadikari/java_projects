@@ -2,15 +2,20 @@ package com.shyam.orders.service.impl;
 
 import com.shyam.orders.domain.OrderDto;
 import com.shyam.orders.entities.Order;
+import com.shyam.orders.exception.InvalidInputException;
 import com.shyam.orders.mapper.OrderMapper;
 import com.shyam.orders.repository.OrderRepository;
 import com.shyam.orders.service.OrderService;
+import com.shyam.orders.validator.OrderValidatorState;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.shyam.orders.validator.OrderValidator.isValidPrice;
+import static com.shyam.orders.validator.OrderValidator.isValidStyle;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +31,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto createOrder(OrderDto orderDto) {
+    public OrderDto createOrder(OrderDto orderDto) throws Exception {
+        validateInput(orderDto);
         return orderMapper.toDto(orderRepository.save(orderMapper.toEntity(orderDto)));
+    }
+
+    private void validateInput(OrderDto orderDto) throws Exception {
+        OrderValidatorState result = isValidStyle().and(isValidPrice()).apply(orderDto);
+        throw new InvalidInputException(result.name());
     }
 
     @Override

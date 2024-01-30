@@ -15,12 +15,13 @@ spring:
 togglz:
   enabled: true
   console:
-    enabled: true
+    enabled: false
     path: /togglz-console
     secured: false
   features:
     CREATE_ORDER:
-      enabled: false
+      enabled: true
+
 
 #MONGODB_USER: ${MONGODB_USER_NAME}
 #MONGODB_PASSWORD: ${MONGODB_USER_PWD}

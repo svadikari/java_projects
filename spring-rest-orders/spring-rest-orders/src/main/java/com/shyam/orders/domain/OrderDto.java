@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
 
@@ -13,8 +14,11 @@ import java.math.BigDecimal;
 @Builder
 public class OrderDto {
     String id;
+    @NonNull
     String orderNumber;
     String styleNumber;
+    @NonNull
     Integer units;
+    @NonNull
     BigDecimal price;
 }

@@ -39,7 +39,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public OrderDto orders(@RequestBody @Validated OrderDto orderDto) {
+    public OrderDto orders(@RequestBody @Validated OrderDto orderDto) throws Exception {
         HttpStatus httpStatus = HttpStatus.NOT_IMPLEMENTED;
         if(!featureManager.isActive(new NamedFeature("CREATE_ORDER"))){
             throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED, "Order Create Feature Not enabled!");

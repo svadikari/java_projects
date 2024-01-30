@@ -38,7 +38,7 @@ class OrderServiceImplTest {
     }
 
     @Test
-    void saveOrderSuccessfully() {
+    void saveOrderSuccessfully() throws Exception {
         when(orderRepository.save(any())).thenReturn(Order.builder().id(UUID.randomUUID().toString()).orderNumber("O123").styleNumber("1234").units(5).price(BigDecimal.TEN).build());
         orderService.createOrder(OrderDto.builder().orderNumber("O123").styleNumber("1234").units(5).price(BigDecimal.TEN).build());
         verify(orderRepository, times(1)).save(any());
