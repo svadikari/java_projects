@@ -31,14 +31,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto createOrder(OrderDto orderDto) throws Exception {
+    public OrderDto createOrder(OrderDto orderDto){
         validateInput(orderDto);
         return orderMapper.toDto(orderRepository.save(orderMapper.toEntity(orderDto)));
     }
 
-    private void validateInput(OrderDto orderDto) throws Exception {
+    private void validateInput(OrderDto orderDto){
         OrderValidatorState result = isValidStyle().and(isValidPrice()).apply(orderDto);
-        throw new InvalidInputException(result.name());
+        if (result != OrderValidatorState.VALID) {
+            throw new InvalidInputException(result.name());
+        }
     }
 
     @Override
