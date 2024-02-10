@@ -35,7 +35,7 @@ class OrderServiceImplTest {
 
     @Test
     void fetchOrders() {
-        when(orderRepository.findAll()).thenReturn(preprareOrders());
+        when(orderRepository.findAll()).thenReturn(prepareOrders());
         List<OrderDto> orderDtos = orderService.fetchOrders();
         verify(orderRepository, times(1)).findAll();
         assertEquals(4, orderDtos.size());
@@ -81,7 +81,7 @@ class OrderServiceImplTest {
     }
 
 
-    private List<Order> preprareOrders() {
+    private List<Order> prepareOrders() {
         return Arrays.asList(
                 Order.builder().orderNumber("O111").id(UUID.randomUUID().toString()).build(),
                 Order.builder().orderNumber("O222").id(UUID.randomUUID().toString()).build(),
